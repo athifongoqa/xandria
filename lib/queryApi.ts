@@ -8,7 +8,6 @@ const query = async (prompt: string, chatId: string, model: string) => {
         top_p: 1,
         presence_penalty: 0,
         frequency_penalty: 0,
-        stream: false,
         model: model,
     })
     .then((res) => res.data.choices[0].text)
