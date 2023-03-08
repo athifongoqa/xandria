@@ -1,8 +1,17 @@
-function ChatPage() {
+import ChatInput from "../../../components/ChatInput"
+import Chat from "../../../components/Chat"
+
+type Props = {
+    params: {
+        id: string
+    }
+}
+
+function ChatPage({ params: { id } }: Props) {
   return (
-    <div>
-        {/* Chat */}
-        {/* ChatInput */}
+    <div className="flex flex-col h-screen overflow-hidden">
+        <Chat chatId={id} />
+        <ChatInput chatId={id} />
     </div>
   )
 }
