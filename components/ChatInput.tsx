@@ -5,6 +5,9 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
+import toast from "react-hot-toast";
+import ModelSelection from "./ModelSelection";
+import useSWR from 'swr'
 
 type Props = {
     chatId: string;
@@ -14,8 +17,9 @@ function ChatInput({ chatId }: Props) {
   const [prompt, setPrompt] = useState('')
   const { data: session } = useSession()
 
-  // TODO: useSWR to get model
-  const model = 'text-davinci-003';
+  const { data: model } = useSWR('model', {
+    fallbackData: 'text-davinci-003'
+  })
 
   const sendQuestion = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -40,7 +44,8 @@ function ChatInput({ chatId }: Props) {
         message
     )
 
-    // Toast notification to say loading
+    const notification = toast.loading('Magnetizing your question...')
+
 
     await fetch('/api/askQuestion', {
         method: 'POST',
@@ -51,7 +56,9 @@ function ChatInput({ chatId }: Props) {
             prompt: input, chatId, model, session
         })
     }).then(() => {
-        // Toast notification to say success
+        toast.success('Check out the response!', {
+            id: notification
+        })
     })
   };
 
@@ -75,8 +82,8 @@ function ChatInput({ chatId }: Props) {
             </button>
         </form>
 
-        <div>
-            {/* ModelSelection */}
+        <div className="md:hidden">
+            <ModelSelection/>
         </div>
     </div>
   )
