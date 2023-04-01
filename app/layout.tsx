@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
 import Login from '../components/Login'
 import ClientProvider from '../components/ClientProvider'
+import MainNav from '../components/MainNav'
 
 export const metadata = {
   title: 'Magnetic Chat',
@@ -25,8 +26,12 @@ export default async function RootLayout({
             <Login/>
           ): (
             <div className='flex'> 
-              
-                <div className='bg-[#202123] max-w-xs h-screen overflow-y-auto
+
+                <div className='bg-[#202123]'>
+                  <MainNav />
+                </div>
+
+                <div className='bg-[#1d1e1f] max-w-xs h-screen overflow-y-auto
                 md:min-w-[20rem]'>
                   <SideBar />
                 </div>

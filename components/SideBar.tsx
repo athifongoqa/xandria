@@ -6,7 +6,6 @@ import { useSession, signOut } from 'next-auth/react'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import NewChat from './NewChat'
 import ChatRow from './ChatRow';
-import ModelSelection from './ModelSelection';
 
 function SideBar() {
   const { data: session } = useSession();
@@ -21,10 +20,6 @@ function SideBar() {
             <div> 
                 <NewChat />
 
-                <div className='hidden sm:inline'>
-                  <ModelSelection />
-                </div>
-
                 <div className='flex flex-col space-y-2 my-2'>
                   { loading && (
                     <div className='animate-pulse text-center text-white'>
@@ -38,11 +33,6 @@ function SideBar() {
 
             </div>
         </div>
-
-        {session && <img src={session.user?.image!} alt='' 
-        className='h-30 w-30 rounded-full cursor-pointer hover:opacity-50 mx-auto mb-2'
-        onClick={() => signOut()}
-        />}
     </div>
   );
 }
