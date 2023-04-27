@@ -1,34 +1,46 @@
 'use client'
 
-import { ChatBubbleLeftRightIcon, ClockIcon, ComputerDesktopIcon, CircleStackIcon, CodeBracketSquareIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
+import { 
+    ChatBubbleLeftRightIcon, 
+    ComputerDesktopIcon, CircleStackIcon, 
+    ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
 import { useSession, signOut } from 'next-auth/react'
+import Link from 'next/link';
+import CodeLogo from '../public/code.png'
 
 function MainNav() {
     const { data: session } = useSession();
-    
+
     return (
         <div className='p-2 flex flex-col h-screen text-white'>
             <div className='flex-1 space-y-4'>
                 <div> 
-                    <CodeBracketSquareIcon className="w-8 h-8 mainNavIcon" />
+                <Link href="/">
+                    <img src={CodeLogo.src} alt='' className='h-8 w-8' />
+                </Link>
                 </div>
                 <div> 
                     <hr />
                 </div>
                 <div> 
-                    <ChatBubbleLeftRightIcon className="w-8 h-8 mainNavIcon" />
-                </div>
-                <div> 
-                    <ClockIcon className="w-8 h-8 mainNavIcon" />
+                <Link href="/chat">
+                    <ChatBubbleLeftRightIcon 
+                    className="w-8 h-8 mainNavIcon"
+                    />
+                </Link>
                 </div>
                 <div> 
                     <hr />
                 </div>
                 <div> 
+                <Link href="/sources">
                     <CircleStackIcon className="w-8 h-8 mainNavIcon" />
+                </Link>
                 </div>
                 <div> 
+                <Link href="/integrations">
                     <ComputerDesktopIcon className="w-8 h-8 mainNavIcon" />
+                </Link>
                 </div>
             </div>
     

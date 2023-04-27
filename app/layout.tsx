@@ -1,5 +1,4 @@
 import './globals.css'
-import SideBar from '../components/SideBar'
 import SessionProvider from '../components/SessionProvider'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../pages/api/auth/[...nextauth]'
@@ -8,8 +7,11 @@ import ClientProvider from '../components/ClientProvider'
 import MainNav from '../components/MainNav'
 
 export const metadata = {
-  title: 'Magnetic Chat',
-  description: 'Magnetic Chat',
+  title: 'Xandria Chat',
+  description: 'Xandria Chat',
+  icons: {
+    icon: '../public/code.png',
+  },
 }
 
 export default async function RootLayout({
@@ -29,11 +31,6 @@ export default async function RootLayout({
 
                 <div className='bg-[#202123]'>
                   <MainNav />
-                </div>
-
-                <div className='bg-[#1d1e1f] max-w-xs h-screen overflow-y-auto
-                md:min-w-[20rem]'>
-                  <SideBar />
                 </div>
 
                 <ClientProvider />

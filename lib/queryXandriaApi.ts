@@ -1,15 +1,21 @@
-const query = async (question: string) => {
+const queryXandriaApi = async (question: string) => {
     const response = await fetch(`${process.env.XANDRIA_BE_URL}`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
         method: 'POST',
         body: JSON.stringify({
-            question: question,
-            token: process.env.XANDRIA_TOKEN,
+            "question": `${question}`,
+            "token": process.env.XANDRIA_TOKEN,
         })
     })
-    .then((res) => console.log(res))
-    .catch((err) => `We were unable to respond to your question. Please try again later. (Error: ${err.message})`);
+    .then((res) => {
+        return res.json()
+    })
+    .catch((err) => `We were unable to respond to the question. Please try again later. (Error: ${err.message})`);
 
-    return response 
+    return response.results[0].answer
 }
 
-export default query
+export default queryXandriaApi

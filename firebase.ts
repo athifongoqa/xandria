@@ -1,15 +1,14 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAsLHZwXlhDIR_tR9Ao-Z2UkTLb9Tsx9ko",
-  authDomain: "magnetic-fe.firebaseapp.com",
-  projectId: "magnetic-fe",
-  storageBucket: "magnetic-fe.appspot.com",
-  messagingSenderId: "1013191445579",
-  appId: "1:1013191445579:web:64aff0d8047f1d935911ce",
-  measurementId: "G-F8DN27RXD9"
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: "xandria-1444b.firebaseapp.com",
+  projectId: "xandria-1444b",
+  storageBucket: "xandria-1444b.appspot.com",
+  messagingSenderId: "660655247887",
+  appId: "1:660655247887:web:ea1fc9976f5d637916097a",
+  measurementId: "G-KN0ZWDYNB6"
 };
 
 // Initialize Firebase

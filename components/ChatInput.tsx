@@ -6,8 +6,6 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
-import ModelSelection from "./ModelSelection";
-import useSWR from 'swr'
 
 type Props = {
     chatId: string;
@@ -16,10 +14,6 @@ type Props = {
 function ChatInput({ chatId }: Props) {
   const [prompt, setPrompt] = useState('')
   const { data: session } = useSession()
-
-  const { data: model } = useSWR('model', {
-    fallbackData: 'text-davinci-003'
-  })
 
   const sendQuestion = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -44,7 +38,7 @@ function ChatInput({ chatId }: Props) {
         message
     )
 
-    const notification = toast.loading('Magnetizing your question...')
+    const notification = toast.loading('Cooking...')
 
 
     await fetch('/api/askQuestion', {
@@ -53,17 +47,17 @@ function ChatInput({ chatId }: Props) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            prompt: input, chatId, model, session
+            prompt: input, chatId, session
         })
     }).then(() => {
-        toast.success('Check out the response!', {
+        toast.success('Voila!', {
             id: notification
         })
     })
   };
 
   return (
-    <div className="bg-gray-700/50 text-gray-400 rounded-lg text-sm">
+    <div className="bg-gray-700/50 text-gray-400 rounded-lg text-sm scroll-m-0">
         <form onSubmit={sendQuestion} className="p-5 space-x-5 flex">
             <input 
                 className="bg-transparent focus:outline-none flex-1 disabled:cursor-not-allowed disabled:text-gray-300"
@@ -81,10 +75,6 @@ function ChatInput({ chatId }: Props) {
                 <PaperAirplaneIcon className="h-4 w-4 -rotate-45"/>
             </button>
         </form>
-
-        <div className="md:hidden">
-            <ModelSelection/>
-        </div>
     </div>
   )
 }

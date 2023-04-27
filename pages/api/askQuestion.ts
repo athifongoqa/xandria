@@ -1,4 +1,4 @@
-import query from '../../lib/queryApi'
+import queryXandriaApi from '../../lib/queryXandriaApi'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { adminDb } from '@/firebaseAdmin'
 import admin from 'firebase-admin'
@@ -11,7 +11,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
-    const { prompt, chatId, model, session } = req.body
+    const { prompt, chatId, session } = req.body
 
     if (!prompt) {
         res.status(400).json({ answer: 'Please prvide a prompt!' })
@@ -23,15 +23,15 @@ export default async function handler(
         return
     }
 
-    const response = await query(prompt, chatId, model)
+    const response = await queryXandriaApi(prompt)
 
     const message: Message = {
-        text: response || 'ChatGPT was unable to respond to your question. Please try again later.',
+        text: response || 'Xandria was unable to respond to your question. Please try again later.',
         createdAt: admin.firestore.Timestamp.now(),
         user: {
-            _id: 'ChatGPT',
-            name: 'ChatGPT',
-            avatar: 'https://links.papareact.com/89k',
+            _id: 'Xandria',
+            name: 'Xandria',
+            avatar: 'https://s3.eu-central-1.amazonaws.com/prod-platform-branding/32437fe8-6c0d-4aab-9e34-6d99c67c5fa3/9b3fcea6-1df6-4215-b8ec-83954315d74b/avatar-b4a45729-2ab3-4905-baab-30b253cbbfbb',
         },
     }
 

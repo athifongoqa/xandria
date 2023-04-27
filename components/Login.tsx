@@ -1,12 +1,13 @@
 'use client'
 import { signIn } from "next-auth/react"
 import Image from "next/image"
+import CodeLogo from '../public/code.png'
 
 function Login() {
   return (
-    <div className="bg-[#11A37F] h-screen flex flex-col items-center justify-center text-center">
+    <div className="bg-black h-screen flex flex-col items-center justify-center text-center">
         <Image 
-        src="https://links.papareact.com/2i6"
+        src={CodeLogo.src}
         width={300}
         height={300}
         alt="logo"
@@ -15,7 +16,7 @@ function Login() {
         onClick={() => signIn('google')} 
         className="text-white font-bold text-3xl animate-pulse"
         >
-            Sign In to use Magnetic
+            Sign In to use Xandria
         </button>
     </div>
   )
