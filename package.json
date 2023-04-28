@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress": "cypress open",
+    "test:e2e:run": "cypress run",
+    "test:comp:run": "cypress run --component"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
@@ -30,7 +33,10 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^9.0.0",
     "autoprefixer": "^10.4.13",
+    "cypress": "^12.11.0",
+    "cypress-social-logins": "^1.14.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7"
   }
