@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import { db } from "../firebase";
+import { addDoc, collection } from "firebase/firestore";
+import { useSession } from "next-auth/react";
+import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
 type FormProps = {
@@ -9,8 +12,9 @@ function Form({ kind }: FormProps) {
   const [name, setName] = useState("");
   const [apiKey, setApiKey] = useState("");
   const [startID, setStartID] = useState("");
+  const { data: session } = useSession()
 
-  const handleSubmit =  async (event: any) => {
+  const handleSubmit =  async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const notification = toast.loading('Cooking...')
@@ -25,18 +29,23 @@ function Form({ kind }: FormProps) {
           page_id: startID,
         })
     })
-    .then((res) => {
+    .then(async (res) => {
       console.log(res.status)
       if (res.status === 200) {
         toast.success('Voila!', {
           id: notification
-      })} else {
+      })
+      await addDoc(
+        collection(db, 'users', session?.user?.email!, 'sources', name, 'notion'),
+        {apiKey: apiKey, startID: startID}
+      )
+    } else {
         toast.error('Something went wrong', {
           id: notification
           })
       }
     })
-      
+    
       setName("");
       setApiKey("");
       setStartID("");
