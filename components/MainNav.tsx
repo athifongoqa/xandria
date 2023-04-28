@@ -1,8 +1,7 @@
 'use client'
 
 import { 
-    ChatBubbleLeftRightIcon, 
-    ComputerDesktopIcon, CircleStackIcon, 
+    ChatBubbleLeftRightIcon, CircleStackIcon, 
     ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link';
@@ -35,11 +34,6 @@ function MainNav() {
                 <div> 
                 <Link href="/sources">
                     <CircleStackIcon className="w-8 h-8 mainNavIcon" />
-                </Link>
-                </div>
-                <div> 
-                <Link href="/integrations">
-                    <ComputerDesktopIcon className="w-8 h-8 mainNavIcon" />
                 </Link>
                 </div>
             </div>
