@@ -1,5 +1,5 @@
 import React from 'react'
-import ChatRow from './ChatRow'
+import ChatRow from '../ChatRow'
 
 describe('<ChatRow />', () => {
   it('renders', () => {
