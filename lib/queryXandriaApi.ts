@@ -15,7 +15,12 @@ const queryXandriaApi = async (question: string) => {
     })
     .catch((err) => `We were unable to respond to the question. Please try again later. (Error: ${err.message})`);
 
-    return response.results[0].answer
-}
+    try {
+        return response.results[0].answer
+    } catch {
+        return 'We were unable to respond to the question. Odds are that we do not have relevant source material.';
+    }
+    }
+
 
 export default queryXandriaApi
