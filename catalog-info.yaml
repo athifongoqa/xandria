@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: xandria
+  description: Test
+  annotations:
+    github.com/project-slug: athifongoqa/xandria
+    backstage.io/source-location: url:https://github.com/athifongoqa/xandria/
+  tags:
+    - demo
+
+spec:
+  type: service
+  owner: test
+  lifecycle: experimental
